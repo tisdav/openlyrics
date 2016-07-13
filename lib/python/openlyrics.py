@@ -727,8 +727,11 @@ class Lines(object):
             if child.tag == "{%s}br"%OLYR_NS: #Line break
                 self.lines.append(Line(cur_line))
                 cur_line = child.tail
-            elif child.tail: # Skip <chord> and custom tags for now
-                cur_line += child.tail
+            else:# Skip <chord> and custom tags for now but add element text content
+                if child.text:
+                    cur_line += child.text
+                if child.tail:
+                    cur_line += child.tail
         
         self.lines.append(Line(cur_line)) #Create Line object for the last line
     
