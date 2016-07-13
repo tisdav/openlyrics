@@ -721,7 +721,7 @@ class Lines(object):
         self.part = elem.get(u'part', u'')
         #self.lines.append(Line(elem.text)) #First line
         ct=1
-        cur_line = elem.text
+        cur_line = str(elem.text or '') # elem.text can be NoneType for that += is not defined
         for child in elem:
             ct+=1
             if child.tag == "{%s}br"%OLYR_NS: #Line break
